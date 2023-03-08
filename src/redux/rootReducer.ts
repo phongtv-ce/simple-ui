@@ -1,7 +1,11 @@
-import { counterReducer } from './counter/slice';
+import { blogDetailsReducer } from './blogDetails/slice';
+import { blogListReducer } from './blogList/slice';
+import { blogListFilterReducer } from './blogListFilter/slice';
 
 const rootReducer = {
-  counter: counterReducer,
+  blogList: blogListReducer,
+  blogDetails: blogDetailsReducer,
+  blogListFilter: blogListFilterReducer,
 };
 
 export default rootReducer;
