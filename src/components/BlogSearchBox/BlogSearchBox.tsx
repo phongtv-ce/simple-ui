@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { blogListFilterActions } from 'redux/blogListFilter/slice';
-import { useAppDispatch } from 'redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 const BlogSearchBox: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const [searchText, setSearchText] = useState('');
+  const { search } = useAppSelector((state) => state.blogListFilter);
 
   const onChange = (event: any): void => {
     setSearchText(event.target.value);
@@ -18,6 +19,10 @@ const BlogSearchBox: React.FC = (): JSX.Element => {
       )
     );
   };
+
+  useEffect(() => {
+    if (search !== undefined) setSearchText(search);
+  }, [search]);
 
   return (
     <form className="form-inline my-2 my-lg-0">
