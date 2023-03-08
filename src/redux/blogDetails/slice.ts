@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IBlogDetails } from 'interfaces/blog.interface';
+import { IBlogDetails } from 'interfaces/blogDetails.interface';
 
 export interface IBlogDetailsSlice {
   data: IBlogDetails;

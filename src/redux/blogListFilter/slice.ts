@@ -1,12 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface IBlogListFilter {
-  page?: number;
-  limit?: number;
-  sortBy?: string;
-  order?: 'asc' | 'desc';
-  search?: string;
-}
+import { IBlogListFilter } from 'interfaces/blogListFilter.interface';
 
 const initialState: IBlogListFilter = {
   page: 1,
@@ -23,18 +17,25 @@ export const blogListFilterSlice = createSlice({
     changePagination: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
     },
+    paginationNext: (state) => {
+      state.page = state.page + 1;
+    },
+    paginationPrev: (state) => {
+      if (state.page > 1) state.page = state.page - 1;
+    },
     changePageLimit: (state, action: PayloadAction<number>) => {
       state.limit = action.payload;
     },
-    changeOrder: (state, action: PayloadAction<'asc' | 'desc'>) => {
+    changeOrder: (state, action: PayloadAction<string>) => {
       state.order = action.payload;
     },
     changeSortBy: (state, action: PayloadAction<string>) => {
       state.sortBy = action.payload;
     },
-    changeSearch: (state, action: PayloadAction<string>) => {
-      state.search = action.payload;
-    },
+    changeSearch: (state, action: PayloadAction<string>) => ({
+      ...initialState,
+      search: action.payload,
+    }),
     clearFilter: (state) => initialState,
   },
 });

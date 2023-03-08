@@ -1,7 +1,7 @@
 import React from 'react';
 import IndexRouter from 'routers/IndexRouter/IndexRouter';
 
-import './App.css'
+import './App.css';
 
 function App(): JSX.Element {
   return (

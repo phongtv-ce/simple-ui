@@ -6,3 +6,9 @@
   opacity: 0.8;
   background-color: #eee;
 }
+
+.blog-image {
+  width: 128px;
+  height: 128px;
+  object-fit: cover;
+}

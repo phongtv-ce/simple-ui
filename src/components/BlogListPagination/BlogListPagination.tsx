@@ -1,33 +1,51 @@
 import React from 'react';
+import { blogListFilterActions } from 'redux/blogListFilter/slice';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 const BlogListPagination: React.FC = (): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const { page, limit } = useAppSelector((state) => state.blogListFilter);
+  const { data: blogList } = useAppSelector((state) => state.blogList);
   return (
-    <nav aria-label="Page navigation example">
+    <nav aria-label="Blog navigation">
       <ul className="pagination">
-        <li className="page-item">
-          <a className="page-link" href="#">
-            Previous
-          </a>
+        <li
+          className={`page-item ${page <= 1 ? 'disabled' : ''}`}
+          onClick={() => dispatch(blogListFilterActions.paginationPrev())}
+        >
+          <a className="page-link">Previous</a>
         </li>
-        <li className="page-item">
-          <a className="page-link" href="#">
-            1
-          </a>
+        {page > 1 && (
+          <li
+            className="page-item"
+            onClick={() =>
+              dispatch(blogListFilterActions.changePagination(page - 1))
+            }
+          >
+            <a className="page-link">{page - 1}</a>
+          </li>
+        )}
+        <li className="page-item active">
+          <a className="page-link">{page}</a>
         </li>
-        <li className="page-item">
-          <a className="page-link" href="#">
-            2
-          </a>
-        </li>
-        <li className="page-item">
-          <a className="page-link" href="#">
-            3
-          </a>
-        </li>
-        <li className="page-item">
-          <a className="page-link" href="#">
-            Next
-          </a>
+        {blogList.length >= limit && (
+          <li
+            className="page-item"
+            onClick={() =>
+              dispatch(blogListFilterActions.changePagination(page + 1))
+            }
+          >
+            <a className="page-link">{page + 1}</a>
+          </li>
+        )}
+        <li
+          className={`page-item ${blogList.length < limit ? 'disabled' : ''}`}
+          onClick={() =>
+            blogList.length >= limit &&
+            dispatch(blogListFilterActions.paginationNext())
+          }
+        >
+          <a className="page-link">Next</a>
         </li>
       </ul>
     </nav>

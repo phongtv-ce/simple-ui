@@ -6,9 +6,3 @@ export interface IBlog {
   content?: string;
   createdAt?: string;
 }
-
-export interface IBlogItem extends Partial<IBlog> {
-}
-
-export interface IBlogDetails extends Partial<IBlog> {
-}

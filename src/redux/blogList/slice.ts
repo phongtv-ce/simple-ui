@@ -1,12 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface IBlog {
-  "createdAt": string;
-  "title": string;
-  "image": string;
-  "content": string;
-  "id": string;
-}
+import { IBlog } from 'interfaces/blog.interface';
+import { IBlogListFilter } from 'interfaces/blogListFilter.interface';
 
 export interface IBlogListSlice {
   data: IBlog[];
@@ -22,7 +17,7 @@ export const blogListSlice = createSlice({
   name: 'blogList',
   initialState,
   reducers: {
-    fetchBlogList: (state) => {
+    fetchBlogList: (state, action: PayloadAction<IBlogListFilter>) => {
       state.loading = true;
       state.data = [];
     },

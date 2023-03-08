@@ -13,7 +13,7 @@ const IndexRouter: React.FC = (): ReactElement => {
           {routes.map(({ component: Component, path, ...rest }) => (
             <Route
               element={
-                <Suspense fallback={<Spinner/>}>
+                <Suspense fallback={<Spinner />}>
                   <Component />
                 </Suspense>
               }

@@ -1,10 +1,8 @@
 import React from 'react';
-import { IBlogDetails } from 'interfaces/blog.interface';
+import { IBlogDetails } from 'interfaces/blogDetails.interface';
 
-interface IBlogDetailsProps extends Partial<IBlogDetails>{
-}
+interface IBlogDetailsProps extends Partial<IBlogDetails> {}
 const BlogDetails: React.FC<IBlogDetailsProps> = ({
-  id,
   title,
   image,
   imageAlt,
@@ -12,13 +10,23 @@ const BlogDetails: React.FC<IBlogDetailsProps> = ({
   createdAt,
 }): JSX.Element => {
   return (
-    <div className="media">
-      <img src={image} className="img-thumbnail mr-3" alt={imageAlt} />
-      <div className="media-body">
-        <h5 className="mt-0">{title}</h5>
-        {content}
-        <br/>
-        {createdAt !== undefined && new Date(String(createdAt)) .toLocaleString()}
+    <div className="container-fluid my-4">
+      <div className="row">
+        <div className="col">
+          <img src={image} className="img-thumbnail mr-3" alt={imageAlt} />
+        </div>
+      </div>
+      <div className="row mt-4">
+        <div className="col">
+          <h5 className="mt-0">{title}</h5>
+          {content}
+        </div>
+      </div>
+      <div className="row mt-4">
+        <div className="col text-secondary">
+          {createdAt !== undefined &&
+            new Date(String(createdAt)).toLocaleString()}
+        </div>
       </div>
     </div>
   );

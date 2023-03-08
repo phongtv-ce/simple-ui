@@ -6,14 +6,16 @@ import Spinner from 'components/Spinner/Spinner';
 import { blogListActions } from 'redux/blogList/slice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import BlogListPagination from 'components/BlogListPagination/BlogListPagination';
+import FilterBar from 'components/FilterBar/FilterBar';
 
 const HomePage: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const { data: blogList, loading } = useAppSelector((state) => state.blogList);
+  const blogListFilter = useAppSelector((state) => state.blogListFilter);
 
   useEffect(() => {
-    dispatch(blogListActions.fetchBlogList());
-  }, []);
+    dispatch(blogListActions.fetchBlogList(blogListFilter));
+  }, [blogListFilter]);
 
   return (
     <>
@@ -21,8 +23,9 @@ const HomePage: React.FC = (): JSX.Element => {
         <Spinner />
       ) : (
         <>
+          <FilterBar />
           <BlogList blogList={blogList} />
-          <BlogListPagination />{' '}
+          <BlogListPagination />
         </>
       )}
     </>
