@@ -1,3 +1,7 @@
+# Run using docker
+Build image: `docker build -t <image_name>:<tag> .`
+
+Run on local: `docker run --rm -p <hostport>:80 --name <container_name> <image_name>`
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
